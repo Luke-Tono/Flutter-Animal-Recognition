@@ -1,0 +1,68 @@
+//allprojects {
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//}
+//
+//rootProject.buildDir = "../build"
+//subprojects {
+//    project.buildDir = "${rootProject.buildDir}/${project.name}"
+//}
+//subprojects {
+//    project.evaluationDependsOn(":app")
+//}
+//
+//tasks.register("clean", Delete) {
+//    delete rootProject.buildDir
+//}
+//
+//buildscript {
+//    dependencies {
+//        // 添加 Google Services 插件依赖
+//        classpath 'com.google.gms:google-services:4.3.15' // 确保版本是最新的
+//    }
+//}
+
+
+
+
+
+
+
+// 添加 buildscript 块
+buildscript {
+    repositories {
+        google() // 用于解析 Google 相关的依赖
+        mavenCentral() // 用于解析其他依赖
+    }
+    dependencies {
+        // 添加 Google Services 插件依赖
+        classpath 'com.google.gms:google-services:4.3.15'
+    }
+}
+
+allprojects {
+    repositories {
+        google() // 用于 Google 的依赖，例如 Firebase
+        mavenCentral() // 用于其他依赖
+    }
+}
+
+// 设置项目级构建目录
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+// 注册清理任务
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+
+
+
+
